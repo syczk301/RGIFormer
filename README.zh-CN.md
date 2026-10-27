@@ -46,33 +46,59 @@ flowchart TD
 
 ### 恢复引导的输入校正
 
-设输入向量为 $`x`$，重建结果为 $`\hat{x}`$，学习得到的门控为 $`r`$，校正后的输入为：
+设输入向量为 x，重建结果为 x̂，学习得到的门控为 r，校正后的输入为：
 
-```math
+![恢复引导的输入校正](assets/math/input-correction.svg)
+
+<details>
+<summary>LaTeX 源码</summary>
+
+```latex
 \tilde{x} = x + \alpha(1-r)\odot(\hat{x}-x).
 ```
 
-默认校正系数为 $`\alpha=0.15`$。后续图编码器与序列编码器的输入还会接收来自前一阶段的可学习残差注入。
+</details>
+
+默认校正系数为 α = 0.15。后续图编码器与序列编码器的输入还会接收来自前一阶段的可学习残差注入。
 
 ### 分类与原型得分
 
 最终类别 logits 由判别分类器得分与原型得分加权相加得到：
 
-```math
+![融合类别得分](assets/math/class-logits.svg)
+
+<details>
+<summary>LaTeX 源码</summary>
+
+```latex
 z = z_{\mathrm{classifier}} + \beta z_{\mathrm{prototype}}.
 ```
 
-```math
+</details>
+
+![原型距离得分](assets/math/prototype-score.svg)
+
+<details>
+<summary>LaTeX 源码</summary>
+
+```latex
 z_{\mathrm{prototype},c} = -\frac{\lVert e-p_c\rVert_2^2}{\tau}.
 ```
 
-其中，$`e`$ 和 $`p_c`$ 分别为归一化后的样本嵌入与类别原型，$`\tau`$ 为可学习的正值尺度参数。默认原型贡献系数为 $`\beta=0.35`$，预测类别为融合得分最大的类别。
+</details>
+
+其中，e 和 p<sub>c</sub> 分别为归一化后的样本嵌入与类别原型，τ 为可学习的正值尺度参数。默认原型贡献系数为 β = 0.35，预测类别为融合得分最大的类别。
 
 ## 训练目标
 
 主模型采用以下联合训练目标：
 
-```math
+![联合训练目标](assets/math/joint-loss.svg)
+
+<details>
+<summary>LaTeX 源码</summary>
+
+```latex
 \begin{aligned}
 \mathcal{L} ={}& \mathcal{L}_{\mathrm{classification}}
 + \lambda_{\mathrm{recovery}}\mathcal{L}_{\mathrm{recovery}} \\
@@ -80,6 +106,8 @@ z_{\mathrm{prototype},c} = -\frac{\lVert e-p_c\rVert_2^2}{\tau}.
 + \mathcal{L}_{\mathrm{prototype}}.
 \end{aligned}
 ```
+
+</details>
 
 - **分类损失：**采用焦点损失（focal loss），类别权重和标签平滑由具体配置决定。
 - **恢复损失：**包括加权特征重建、组内统计量重建、局部与全局表征对齐，以及不同掩码视图之间的一致性约束。

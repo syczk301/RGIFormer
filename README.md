@@ -46,33 +46,59 @@ The sequence encoder operates on **ordered feature-group tokens**. These tokens 
 
 ### Recovery-guided input correction
 
-For an input vector $`x`$, reconstruction $`\hat{x}`$, and learned gate $`r`$, the corrected input is
+For an input vector x, reconstruction x̂, and learned gate r, the corrected input is
 
-```math
+![Recovery-guided input correction](assets/math/input-correction.svg)
+
+<details>
+<summary>LaTeX source</summary>
+
+```latex
 \tilde{x} = x + \alpha(1-r)\odot(\hat{x}-x).
 ```
 
-The default correction scale is $`\alpha=0.15`$. The subsequent graph and sequence inputs also receive learned residual injections from the preceding stages.
+</details>
+
+The default correction scale is α = 0.15. The subsequent graph and sequence inputs also receive learned residual injections from the preceding stages.
 
 ### Classification and prototype scores
 
 The final logits combine the discriminative classifier and the prototype head:
 
-```math
+![Combined class logits](assets/math/class-logits.svg)
+
+<details>
+<summary>LaTeX source</summary>
+
+```latex
 z = z_{\mathrm{classifier}} + \beta z_{\mathrm{prototype}}.
 ```
 
-```math
+</details>
+
+![Prototype distance score](assets/math/prototype-score.svg)
+
+<details>
+<summary>LaTeX source</summary>
+
+```latex
 z_{\mathrm{prototype},c} = -\frac{\lVert e-p_c\rVert_2^2}{\tau}.
 ```
 
-Here, $`e`$ and $`p_c`$ are normalized sample and class-prototype embeddings, $`\tau`$ is a learned positive scale, and the default prototype contribution is $`\beta=0.35`$. The predicted class is the index of the largest combined logit.
+</details>
+
+Here, e and p<sub>c</sub> are normalized sample and class-prototype embeddings, τ is a learned positive scale, and the default prototype contribution is β = 0.35. The predicted class is the index of the largest combined logit.
 
 ## Training objective
 
 The main model is trained jointly with
 
-```math
+![Joint training objective](assets/math/joint-loss.svg)
+
+<details>
+<summary>LaTeX source</summary>
+
+```latex
 \begin{aligned}
 \mathcal{L} ={}& \mathcal{L}_{\mathrm{classification}}
 + \lambda_{\mathrm{recovery}}\mathcal{L}_{\mathrm{recovery}} \\
@@ -80,6 +106,8 @@ The main model is trained jointly with
 + \mathcal{L}_{\mathrm{prototype}}.
 \end{aligned}
 ```
+
+</details>
 
 - **Classification:** focal loss, with configuration-dependent class weighting and label smoothing.
 - **Recovery:** weighted feature reconstruction, group-statistic reconstruction, local/global alignment, and consistency between masked views.

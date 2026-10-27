@@ -25,3 +25,13 @@
 !/trainCode/training/__init__.py
 !/trainCode/training/run_current_rgiformer_ablations.py
 !/trainCode/training/run_traditional_baselines.py
+
+# Documentation equation assets
+!/assets/
+/assets/*
+!/assets/math/
+/assets/math/*
+!/assets/math/input-correction.svg
+!/assets/math/class-logits.svg
+!/assets/math/prototype-score.svg
+!/assets/math/joint-loss.svg
