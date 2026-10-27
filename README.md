@@ -1,5 +1,7 @@
 # RGIFormer
 
+**English** | [简体中文](README.zh-CN.md)
+
 ### Recovery, graph relations, and sparse sequence encoding for industrial fault diagnosis
 
 RGIFormer is a neural network for classifying industrial process faults from multivariate measurements. It combines **multi-scale feature recovery**, **dual-relation graph learning**, and **graph-guided sparse sequence encoding** in a sequential architecture. A recovery-based gate adjusts the input, and a prototype head complements the final discriminative classifier.
@@ -44,36 +46,40 @@ The sequence encoder operates on **ordered feature-group tokens**. These tokens 
 
 ### Recovery-guided input correction
 
-For an input vector $x$, reconstruction $\hat{x}$, and learned gate $r$, the corrected input is
+For an input vector $`x`$, reconstruction $`\hat{x}`$, and learned gate $`r`$, the corrected input is
 
-$$
+```math
 \tilde{x} = x + \alpha(1-r)\odot(\hat{x}-x).
-$$
+```
 
-The default correction scale is $\alpha=0.15$. The subsequent graph and sequence inputs also receive learned residual injections from the preceding stages.
+The default correction scale is $`\alpha=0.15`$. The subsequent graph and sequence inputs also receive learned residual injections from the preceding stages.
 
 ### Classification and prototype scores
 
 The final logits combine the discriminative classifier and the prototype head:
 
-$$
-z = z_{\mathrm{classifier}} + \beta z_{\mathrm{prototype}},
-\qquad
-z_{\mathrm{prototype},c} = -\frac{\lVert e-p_c\rVert_2^2}{\tau}.
-$$
+```math
+z = z_{\mathrm{classifier}} + \beta z_{\mathrm{prototype}}.
+```
 
-Here, $e$ and $p_c$ are normalized sample and class-prototype embeddings, $\tau$ is a learned positive scale, and the default prototype contribution is $\beta=0.35$. The predicted class is the index of the largest combined logit.
+```math
+z_{\mathrm{prototype},c} = -\frac{\lVert e-p_c\rVert_2^2}{\tau}.
+```
+
+Here, $`e`$ and $`p_c`$ are normalized sample and class-prototype embeddings, $`\tau`$ is a learned positive scale, and the default prototype contribution is $`\beta=0.35`$. The predicted class is the index of the largest combined logit.
 
 ## Training objective
 
 The main model is trained jointly with
 
-$$
-\mathcal{L} = \mathcal{L}_{\mathrm{classification}}
-+ \lambda_{\mathrm{recovery}}\mathcal{L}_{\mathrm{recovery}}
-+ \lambda_{\mathrm{graph}}\mathcal{L}_{\mathrm{graph}}
+```math
+\begin{aligned}
+\mathcal{L} ={}& \mathcal{L}_{\mathrm{classification}}
++ \lambda_{\mathrm{recovery}}\mathcal{L}_{\mathrm{recovery}} \\
+&+ \lambda_{\mathrm{graph}}\mathcal{L}_{\mathrm{graph}}
 + \mathcal{L}_{\mathrm{prototype}}.
-$$
+\end{aligned}
+```
 
 - **Classification:** focal loss, with configuration-dependent class weighting and label smoothing.
 - **Recovery:** weighted feature reconstruction, group-statistic reconstruction, local/global alignment, and consistency between masked views.
