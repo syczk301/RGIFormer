@@ -1,0 +1,11 @@
+# Versions inspected in the existing Conda DL environment on 2026-10-27.
+# The installed torch build is 2.10.0+cu130; choose its CUDA wheel for GPU work.
+numpy==2.1.2
+pandas==2.3.3
+scipy==1.15.3
+scikit-learn==1.7.2
+torch==2.10.0
+matplotlib==3.10.7
+seaborn==0.13.2
+joblib==1.5.2
+Pillow==11.0.0
