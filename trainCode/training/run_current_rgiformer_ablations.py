@@ -46,7 +46,7 @@ REPO_ROOT = SCRIPT_PATH.parents[2]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from trainCode.models.Paper import RAE_GCN_Informer_Paper_ModularInnov as base  # noqa: E402
+from trainCode.models.Paper import RGIFormer_Paper as base  # noqa: E402
 
 
 DEFAULT_OUTPUT_DIR = REPO_ROOT / "results" / "02_ablation/original" / "Paper"

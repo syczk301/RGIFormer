@@ -149,7 +149,7 @@ with torch.no_grad():
 |---|---|
 | [BSM2 模型与基线](trainCode/models/BSM2/BSM2_Baseline_Comparisons.py) | BSM2 RGIFormer、神经网络基线及训练评估 |
 | [BSM2 时间特征预处理](trainCode/models/BSM2/bsm2_temporal_features.py) | 可选的滞后与滚动统计特征 |
-| [造纸 RGIFormer](trainCode/models/Paper/RAE_GCN_Informer_Paper_ModularInnov.py) | 造纸主模型及训练流程 |
+| [造纸 RGIFormer](trainCode/models/Paper/RGIFormer_Paper.py) | 造纸主模型及训练流程 |
 | [造纸神经网络基线](trainCode/models/Paper/Paper_Baseline_Comparisons.py) | 神经网络模型对比 |
 | [匹配消融实验](trainCode/training/run_current_rgiformer_ablations.py) | 造纸模型组件消融 |
 | [传统分类基线](trainCode/training/run_traditional_baselines.py) | 传统分类模型 |
@@ -182,7 +182,7 @@ BSM2 输入包含数值型过程变量和整数类别列 `label`；可选的时�
 python -m trainCode.models.BSM2.BSM2_Baseline_Comparisons --model rgiformer --mode single --seed 42 --temporal-features none --tuning-profile legacy --device auto
 
 # 造纸 RGIFormer。
-python -m trainCode.models.Paper.RAE_GCN_Informer_Paper_ModularInnov --mode single --seed 42 --device auto
+python -m trainCode.models.Paper.RGIFormer_Paper --mode single --seed 42 --device auto
 
 # 查看匹配消融实验选项。
 python -m trainCode.training.run_current_rgiformer_ablations --help

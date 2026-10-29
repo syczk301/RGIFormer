@@ -19,7 +19,7 @@
 !/trainCode/models/BSM2/bsm2_temporal_features.py
 /trainCode/models/Paper/*
 !/trainCode/models/Paper/__init__.py
-!/trainCode/models/Paper/RAE_GCN_Informer_Paper_ModularInnov.py
+!/trainCode/models/Paper/RGIFormer_Paper.py
 !/trainCode/models/Paper/Paper_Baseline_Comparisons.py
 /trainCode/training/*
 !/trainCode/training/__init__.py

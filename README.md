@@ -150,7 +150,7 @@ Train a model or load compatible trained weights before using its predictions.
 |---|---|
 | [BSM2 model and baselines](trainCode/models/BSM2/BSM2_Baseline_Comparisons.py) | BSM2 RGIFormer, neural baselines, training and evaluation |
 | [BSM2 temporal preprocessing](trainCode/models/BSM2/bsm2_temporal_features.py) | Optional lag and rolling features |
-| [Papermaking RGIFormer](trainCode/models/Paper/RAE_GCN_Informer_Paper_ModularInnov.py) | Main papermaking model and training pipeline |
+| [Papermaking RGIFormer](trainCode/models/Paper/RGIFormer_Paper.py) | Main papermaking model and training pipeline |
 | [Papermaking neural baselines](trainCode/models/Paper/Paper_Baseline_Comparisons.py) | Neural model comparisons |
 | [Matched ablations](trainCode/training/run_current_rgiformer_ablations.py) | Papermaking component ablations |
 | [Traditional baselines](trainCode/training/run_traditional_baselines.py) | Traditional classification models |
@@ -183,7 +183,7 @@ Run training commands from the repository root:
 python -m trainCode.models.BSM2.BSM2_Baseline_Comparisons --model rgiformer --mode single --seed 42 --temporal-features none --tuning-profile legacy --device auto
 
 # Papermaking RGIFormer.
-python -m trainCode.models.Paper.RAE_GCN_Informer_Paper_ModularInnov --mode single --seed 42 --device auto
+python -m trainCode.models.Paper.RGIFormer_Paper --mode single --seed 42 --device auto
 
 # Inspect matched-ablation options.
 python -m trainCode.training.run_current_rgiformer_ablations --help
